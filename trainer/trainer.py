@@ -71,7 +71,7 @@ class Trainer:
         epoch_accuracy = epoch_accuracy / n_samples * 100
 
         # Calculate the training time
-        print(time.time() - current_time)
+        print('Training time for epoch: {:.4f}'.format(time.time() - current_time))
 
         # Display the current status
         print('Train Epoch: {}\t>\tLoss: {:.4f} / Acc: {:.1f}%'.format(epoch, epoch_loss, epoch_accuracy))

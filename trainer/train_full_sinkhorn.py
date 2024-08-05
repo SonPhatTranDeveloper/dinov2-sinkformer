@@ -70,6 +70,7 @@ def train(args):
     # Display info
     print('Train dataset of size %d' % len(DATASETS["train"]))
     print('Validation dataset of size %d' % len(DATASETS["valid"]))
+    print()
 
     # Create trainer
     trainer = Trainer(
