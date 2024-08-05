@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import torch
@@ -90,7 +91,7 @@ def train(args):
     # Model save directory
     stats_save_dir = args["save_dir"]
     stats_save_name = args["save_name"]
-    stats_save_address = stats_save_dir + stats_save_name
+    stats_save_address = os.path.join(stats_save_dir, stats_save_name)
 
     # Train & Validate
     for epoch in range(1, args["epochs"] + 1):
