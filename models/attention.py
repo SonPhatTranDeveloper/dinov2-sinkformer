@@ -88,7 +88,7 @@ class SinkhornAttention(nn.Module):
                  proj_bias: bool = True,
                  attn_drop=0.0,
                  proj_drop=0.0,
-                 max_iter=2,
+                 max_iter=3,
                  eps=1):
         """
         Initialize the scaled product attention sinkhorn normalization block
@@ -183,7 +183,7 @@ class WeightedCombinationAttention(nn.Module):
                  proj_bias: bool = True,
                  attn_drop=0.0,
                  proj_drop=0.0,
-                 max_iter=3,
+                 max_iter=1,
                  eps=1,
                  sinkhorn_weight=0.1):
         """
