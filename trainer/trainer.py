@@ -114,7 +114,7 @@ class Trainer:
         epoch_val_accuracy = epoch_val_accuracy / n_samples * 100
 
         # Display the current stats
-        print('Validation Epoch: {}\t>\tLoss: {:.4f} / Acc: {:.1f}%'.format(epoch, epoch_val_loss, epoch_val_accuracy))
+        print('Validation Epoch: {}\t>\tLoss: {:.4f} / Acc: {:.1f}%\n'.format(epoch, epoch_val_loss, epoch_val_accuracy))
 
         return epoch_val_loss, epoch_val_accuracy
 
