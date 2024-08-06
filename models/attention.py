@@ -6,7 +6,7 @@ import numpy as np
 
 
 class SinkhornDistanceFast(nn.Module):
-    def __init__(self, eps=1, max_iter=1):
+    def __init__(self, eps=1, max_iter=7):
         """
         Initialize the Sinkhorn Fast and Stable AutoDiff algorithm
         Adapted from the paper: https://arxiv.org/pdf/1607.05816.pdf
