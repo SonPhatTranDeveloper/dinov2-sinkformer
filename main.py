@@ -1,9 +1,9 @@
-from trainer import train_full_sinkhorn
+from trainer import train_last_layer_sinkhorn
 
 
 if __name__ == "__main__":
     # Train sinkhorn
-    train_full_sinkhorn({
+    train_last_layer_sinkhorn({
         "lr": 10e-6,
         "save_dir": "result",
         "save_name": "full_sinkhorn.npy",
