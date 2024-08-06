@@ -6,7 +6,7 @@ import numpy as np
 
 
 class SinkhornDistanceFast(nn.Module):
-    def __init__(self, eps=1, max_iter=7):
+    def __init__(self, eps=1, max_iter=3):
         """
         Initialize the Sinkhorn Fast and Stable AutoDiff algorithm
         Adapted from the paper: https://arxiv.org/pdf/1607.05816.pdf
@@ -88,7 +88,7 @@ class SinkhornAttention(nn.Module):
                  proj_bias: bool = True,
                  attn_drop=0.0,
                  proj_drop=0.0,
-                 max_iter=7,
+                 max_iter=3,
                  eps=1):
         """
         Initialize the scaled product attention sinkhorn normalization block
