@@ -1,13 +1,14 @@
-from trainer import train_last_layer_sinkhorn
+from trainer import train_baseline
 
 
 if __name__ == "__main__":
     # Train sinkhorn
-    train_last_layer_sinkhorn({
+    train_baseline({
+        "data": "data/imagenette",
         "lr": 10e-6,
-        "save_dir": "result",
-        "save_name": "result_last_layer_sinkhorn_7_iter.npy",
-        "output_model_prefix": "weights/model_last_layer_sinkhorn_iter_7.pth",
+        "save_dir": "result/imagenette",
+        "save_name": "result_softmax.npy",
+        "output_model_prefix": "weights/model_softmax.pth",
         "epochs": 20,
         "hidden_size": 256,
     })

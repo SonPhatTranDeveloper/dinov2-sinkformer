@@ -15,8 +15,8 @@ import numpy as np
 
 def train(args):
     # Get the training and validation dataset
-    train_dataset_dir = Path("data/train")
-    valid_dataset_dir = Path("data/val")
+    train_dataset_dir = Path(os.path.join(args["data"], "train"))
+    valid_dataset_dir = Path(os.path.join(args["data"], "val"))
 
     # Define image size
     IMAGE_SIZE = 256

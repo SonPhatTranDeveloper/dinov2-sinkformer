@@ -8,7 +8,7 @@ from helpers.dataset import ResizeAndPad
 
 from trainer.trainer import Trainer
 
-from models.full_sinkhorn import DINOClassificationModel
+from models.baseline_softmax import DINOClassificationModel
 
 import numpy as np
 
