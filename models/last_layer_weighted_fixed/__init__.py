@@ -9,7 +9,7 @@ from dinov2.vision_transformer import DinoVisionTransformer, vit_small
 from copy import deepcopy
 
 
-def vit_small_weighted(patch_size=16, num_register_tokens=0, **kwargs):
+def vit_small_sinkhorn(patch_size=16, num_register_tokens=0, **kwargs):
     model = DinoVisionTransformer(
         patch_size=patch_size,
         embed_dim=384,
@@ -35,7 +35,7 @@ def create_vit_and_copy_weight():
     )
 
     # Create ViT Sinkformer
-    vit_sinkformers = vit_small_weighted(patch_size=14,
+    vit_sinkformers = vit_small_sinkhorn(patch_size=14,
                                          img_size=526,
                                          init_values=1.0,
                                          num_register_tokens=4,
@@ -53,36 +53,21 @@ def create_vit_and_copy_weight():
         attn_sinkformer = block_sinkformer.attn
         attn_transformer = block_transformer.attn
 
-        # Load attention weight
-        attn_sinkformer.softmax_attn.qkv.load_state_dict(
-            attn_transformer.qkv.state_dict()
+        # Load the weights for softmax
+        attn_sinkformer.softmax_attn.load_state_dict(
+            attn_transformer.state_dict(),
+            strict=False
         )
-        attn_sinkformer.softmax_attn.attn_drop.load_state_dict(
-            attn_transformer.attn_drop.state_dict()
-        )
-        attn_sinkformer.softmax_attn.proj.load_state_dict(
-            attn_transformer.proj.state_dict()
-        )
-        attn_sinkformer.softmax_attn.proj_drop.load_state_dict(
-            attn_transformer.proj_drop.state_dict()
+        attn_sinkformer.sinkhorn_attn.load_state_dict(
+            attn_transformer.state_dict(),
+            strict=False
         )
 
-        # Load sinkhorn weight
-        attn_sinkformer.sinkhorn_attn.qkv.load_state_dict(
-            attn_transformer.qkv.state_dict()
-        )
-        attn_sinkformer.sinkhorn_attn.attn_drop.load_state_dict(
-            attn_transformer.attn_drop.state_dict()
-        )
-        attn_sinkformer.sinkhorn_attn.proj.load_state_dict(
-            attn_transformer.proj.state_dict()
-        )
-        attn_sinkformer.sinkhorn_attn.proj_drop.load_state_dict(
-            attn_transformer.proj_drop.state_dict()
-        )
+    # Copy back the last block of the sinkformer to the transformer
+    vit_transformers.blocks[11] = vit_sinkformers.blocks[11]
 
     # Create a deep copy of the model
-    return deepcopy(vit_sinkformers)
+    return deepcopy(vit_transformers)
 
 
 class DINOClassificationModel(nn.Module):
@@ -119,3 +104,9 @@ class DINOClassificationModel(nn.Module):
         outputs = self.transformers.norm(outputs)
         outputs = self.classifier(outputs)
         return outputs
+
+
+if __name__ == "__main__":
+    # Create model
+    create_vit_and_copy_weight()
+
