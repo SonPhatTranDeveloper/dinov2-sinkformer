@@ -183,7 +183,7 @@ class WeightedCombinationAttention(nn.Module):
                  proj_bias: bool = True,
                  attn_drop=0.0,
                  proj_drop=0.0,
-                 max_iter=1,
+                 max_iter=5,
                  eps=1,
                  sinkhorn_weight=0.5):
         """
