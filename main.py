@@ -2,13 +2,13 @@ from trainer import train_last_layer_weighted_fixed
 
 
 if __name__ == "__main__":
-    # Train sinkhorn
+    # Train sinkhorn with different weights
     train_last_layer_weighted_fixed({
         "data": "data/imagewoof",
         "lr": 10e-6,
         "save_dir": "result/imagewoof",
-        "save_name": "result_last_layer_weighted_0_5_5_iter.npy",
-        "output_model_prefix": "weights/imagenette/model_last_layer_weighted_0_5_5_iter.pth",
+        "save_name": "result_last_layer_weighted_0_9_5_iter.npy",
+        "output_model_prefix": "weights/imagenette/model_last_layer_weighted_0_9_5_iter.pth",
         "epochs": 20,
         "hidden_size": 256,
     })
