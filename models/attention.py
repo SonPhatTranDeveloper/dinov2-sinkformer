@@ -185,7 +185,7 @@ class WeightedCombinationAttention(nn.Module):
                  proj_drop=0.0,
                  max_iter=1,
                  eps=1,
-                 sinkhorn_weight=0.6):
+                 sinkhorn_weight=0.5):
         """
         Initialize the scaled product attention sinkhorn normalization block
         :param dim: the number of features of the input
