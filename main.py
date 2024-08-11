@@ -1,4 +1,4 @@
-from trainer import train_baseline
+from trainer import train_last_layer_sinkhorn
 import torch
 import random
 import numpy as np
@@ -11,7 +11,7 @@ np.random.seed(1120)
 
 if __name__ == "__main__":
     # Train sinkhorn with different weights
-    train_baseline({
+    train_last_layer_sinkhorn({
         "data": "data/cub200",
         "lr": 10e-6,
         "save_dir": "result/cub200",
