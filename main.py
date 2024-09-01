@@ -15,8 +15,8 @@ if __name__ == "__main__":
         "data": "data/cub200",
         "lr": 10e-6,
         "save_dir": "result/cub200",
-        "save_name": "last_layer_sinkhorn_3.npy",
-        "output_model_prefix": "weights/cub200/last_layer_sinkhorn_3.pth",
+        "save_name": "last_layer_sinkhorn_5.npy",
+        "output_model_prefix": "weights/cub200/last_layer_sinkhorn_5.pth",
         "epochs": 30,
         "hidden_size": 256,
         "k": 5
