@@ -122,6 +122,7 @@ class Trainer:
         """
         Perform the validation at epoch
         :param epoch: the current epoch
+        :param k: the top-k
         :return: the epoch loss and accuracy
         """
         # Get the number of batches and the number of samples of the test loader
