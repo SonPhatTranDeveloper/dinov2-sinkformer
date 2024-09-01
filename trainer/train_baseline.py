@@ -102,10 +102,10 @@ def train(args):
     # Train & Validate
     for epoch in range(1, args["epochs"] + 1):
         # Train the result for thi epoch
-        epoch_loss, epoch_accuracy = trainer.train(epoch)
+        epoch_loss, epoch_accuracy = trainer.train(epoch, k)
 
         # Validate the result
-        epoch_val_loss, epoch_val_accuracy = trainer.validate_top_k(epoch, k)
+        epoch_val_loss, epoch_val_accuracy = trainer.validate(epoch, k)
 
         # Save the result
         if not best_val_accuracy or epoch_val_accuracy > best_val_accuracy:
