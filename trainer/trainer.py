@@ -118,6 +118,49 @@ class Trainer:
 
         return epoch_val_loss, epoch_val_accuracy
 
+    def validate_top_k(self, epoch, k=1):
+        """
+        Perform the validation at epoch
+        :param epoch: the current epoch
+        :return: the epoch loss and accuracy
+        """
+        # Get the number of batches and the number of samples of the test loader
+        n_batches, n_samples = len(self.val_loader), len(self.val_loader.dataset)
+
+        # Put the result into eval mode
+        self.model.eval()
+
+        # Validate
+        with torch.no_grad():
+            epoch_val_accuracy = 0.0
+            epoch_val_loss = 0.0
+
+            for data, label in self.val_loader:
+                # Map image and label to device
+                data = data.to(self.device)
+                label = label.to(self.device)
+
+                # Forward pass through the Visual Transformer
+                val_output = self.model(data)
+                val_loss = self.criterion(val_output, label)
+
+                # Get the loss and accuracy
+                _, top_k = torch.topk(val_output, 5, dim=1)
+                acc = torch.eq(label[:, None, ...], top_k).any(dim=1).float().sum()
+
+                # Add the accuracy and loss
+                epoch_val_accuracy += acc.item()
+                epoch_val_loss += val_loss.item()
+
+        # Calculate the validation accuracy and loss
+        epoch_val_loss = epoch_val_loss / n_batches
+        epoch_val_accuracy = epoch_val_accuracy / n_samples * 100
+
+        # Display the current stats
+        print('Validation Epoch: {}\t>\tLoss: {:.4f} / Top-{} Acc: {:.1f}%\n'.format(epoch, epoch_val_loss, k, epoch_val_accuracy))
+
+        return epoch_val_loss, epoch_val_accuracy
+
     def save(self, model_path, epoch):
         """
         Save the current result

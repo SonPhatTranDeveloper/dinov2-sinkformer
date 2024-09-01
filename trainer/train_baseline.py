@@ -93,16 +93,25 @@ def train(args):
     stats_save_name = args["save_name"]
     stats_save_address = os.path.join(stats_save_dir, stats_save_name)
 
+    # Get the k argument
+    k = args["k"]
+
+    # Save the best model accuracy
+    best_val_accuracy = None
+
     # Train & Validate
     for epoch in range(1, args["epochs"] + 1):
         # Train the result for thi epoch
         epoch_loss, epoch_accuracy = trainer.train(epoch)
 
         # Validate the result
-        epoch_val_loss, epoch_val_accuracy = trainer.validate(epoch)
+        epoch_val_loss, epoch_val_accuracy = trainer.validate_top_k(epoch, k)
 
         # Save the result
-        trainer.save(args["output_model_prefix"], epoch)
+        if not best_val_accuracy or epoch_val_accuracy > best_val_accuracy:
+            print("Saving the best model")
+            best_val_accuracy = epoch_val_accuracy
+            trainer.save(args["output_model_prefix"], epoch)
 
         # Save the training and validation accuracy
         val_accuracy_array.append(epoch_val_accuracy)
