@@ -77,7 +77,7 @@ class Trainer:
         print('Training time for epoch: {:.4f} seconds'.format(time.time() - current_time))
 
         # Display the current status
-        print('Train Epoch: {}\t>\tLoss: {:.4f} / Acc: {:.1f}%'.format(epoch, epoch_loss, epoch_accuracy))
+        print('Train Epoch: {}\t>\tLoss: {:.4f} / Top-{} Acc: {:.1f}%'.format(epoch, epoch_loss, k, epoch_accuracy))
 
         return epoch_accuracy, epoch_accuracy
 
