@@ -15,8 +15,8 @@ if __name__ == "__main__":
         "data": "data/cub200",
         "lr": 10e-6,
         "save_dir": "result/cub200",
-        "save_name": "full_sinkhorn_5.npy",
-        "output_model_prefix": "weights/cub200/full_sinkhorn_5.pth",
+        "save_name": "full_sinkhorn_7.npy",
+        "output_model_prefix": "weights/cub200/full_sinkhorn_7.pth",
         "epochs": 20,
         "hidden_size": 256,
         "k": 5
