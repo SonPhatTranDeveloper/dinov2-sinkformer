@@ -1,4 +1,4 @@
-from trainer import train_last_layer_sinkhorn
+from trainer import train_full_sinkhorn
 import torch
 import random
 import numpy as np
@@ -11,13 +11,13 @@ np.random.seed(1120)
 
 if __name__ == "__main__":
     # Train sinkhorn with different weights
-    train_last_layer_sinkhorn({
+    train_full_sinkhorn({
         "data": "data/cub200",
         "lr": 10e-6,
         "save_dir": "result/cub200",
-        "save_name": "last_layer_sinkhorn_7.npy",
-        "output_model_prefix": "weights/cub200/last_layer_sinkhorn_7.pth",
-        "epochs": 30,
+        "save_name": "full_sinkhorn_3.npy",
+        "output_model_prefix": "weights/cub200/full_sinkhorn_3.pth",
+        "epochs": 20,
         "hidden_size": 256,
         "k": 5
     })
