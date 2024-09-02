@@ -13,10 +13,9 @@ from models.baseline_softmax import DINOClassificationModel
 from models.attention import SinkhornAttention
 from dinov2.layers import NestedTensorBlock as Block
 from functools import partial
-from dinov2.vision_transformer import DinoVisionTransformer, vit_small
+from dinov2.vision_transformer import DinoVisionTransformer
 
 from copy import deepcopy
-
 
 
 def vit_small_sinkhorn(patch_size=16, num_register_tokens=0, **kwargs):
@@ -32,19 +31,21 @@ def vit_small_sinkhorn(patch_size=16, num_register_tokens=0, **kwargs):
     )
     return model
 
+
 def get_model(weight_path):
     # Load the model
     model = DINOClassificationModel(
         hidden_size=256,
         num_classes=len(CLASSES),
     )
-    model.load_state_dict(torch.load(weight_path, weights_only=True))
+    model.load_state_dict(
+        torch.load(weight_path)["model_state_dict"]
+    )
 
     # Copy the weight of the transformer
     vit_transformers = model.transformers
 
     # Copy the weights
-    # Create ViT Sinkformer
     vit_sinkformers = vit_small_sinkhorn(patch_size=14,
                                          img_size=526,
                                          init_values=1.0,
@@ -166,4 +167,4 @@ if __name__ == "__main__":
     print()
 
     # Evaluate
-    trainer.validate(epoch = 0, k = 1)
+    trainer.validate(epoch=0, k=1)
