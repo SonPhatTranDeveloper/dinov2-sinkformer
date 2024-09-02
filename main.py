@@ -1,4 +1,4 @@
-from trainer import train_full_sinkhorn
+from trainer import train_baseline
 import torch
 import random
 import numpy as np
@@ -11,13 +11,13 @@ np.random.seed(1120)
 
 if __name__ == "__main__":
     # Train sinkhorn with different weights
-    train_full_sinkhorn({
-        "data": "data/cub200",
+    train_baseline({
+        "data": "data/imagenette",
         "lr": 10e-6,
-        "save_dir": "result/cub200",
-        "save_name": "full_sinkhorn_7.npy",
-        "output_model_prefix": "weights/cub200/full_sinkhorn_7.pth",
+        "save_dir": "result/imagenette",
+        "save_name": "baseline.npy",
+        "output_model_prefix": "weights/imagenette/baseline.pth",
         "epochs": 20,
         "hidden_size": 256,
-        "k": 5
+        "k": 1
     })

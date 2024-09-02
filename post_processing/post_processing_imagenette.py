@@ -151,9 +151,6 @@ if __name__ == "__main__":
     # Create empty model and load the weight
     model = get_model(weight_dir)
 
-    # Replace softmax with Sinkhorn for the last layer
-    print()
-
     # Create trainer
     trainer = Trainer(
         model,
@@ -167,3 +164,6 @@ if __name__ == "__main__":
     print('Train dataset of size %d' % len(DATASETS["train"]))
     print('Validation dataset of size %d' % len(DATASETS["valid"]))
     print()
+
+    # Evaluate
+    trainer.validate(epoch = 0, k = 1)
