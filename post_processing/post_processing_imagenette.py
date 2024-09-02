@@ -94,7 +94,7 @@ if __name__ == "__main__":
         "lr": 10e-6,
         "save_dir": "result/imagenette",
         "save_name": "baseline.npy",
-        "output_model_prefix": "weights/cub200/baseline.pth",
+        "output_model_prefix": "weights/imagenette/baseline.pth",
         "epochs": 20,
         "hidden_size": 256,
         "k": 5
